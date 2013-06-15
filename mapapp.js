@@ -255,25 +255,28 @@ function MapCtrl($scope) {
         { shortCode: "ZMB" , name:	"Zambia" },
         { shortCode: "ZWE" , name:	"Zimbabwe" }
     ];
-    $scope.fourCountries = [];
-    $scope.activeCountry = {}
+    $scope.shortListedCountries = [];
+    $scope.activeCountry = {};
     var NUMBER_OF_OPTIONS = 4;
     var NUMBER_OF_COUNTRIES = $scope.countries.length;
 
     $scope.utility = function(){
         for(var i = 0 ; i < NUMBER_OF_OPTIONS ; i++){
-            $scope.fourCountries.push($scope.countries[Math.floor((Math.random()*NUMBER_OF_COUNTRIES))]);
+            $scope.shortListedCountries.push($scope.countries[Math.floor((Math.random()*NUMBER_OF_COUNTRIES))]);
         }
-        $scope.activeCountry = $scope.fourCountries[Math.floor(Math.random()*NUMBER_OF_OPTIONS)];
-        console.log($scope.fourCountries);
-        console.log($scope.activeCountry);
-
+        $scope.activeCountry = $scope.shortListedCountries[Math.floor(Math.random()*NUMBER_OF_OPTIONS)];
         var svg_id_of_element = 'g' + $scope.activeCountry.shortCode;
-        console.log(svg_id_of_element);
-        console.log(angular.element(document.getElementById(svg_id_of_element)))
-        console.log(angular.element(document.getElementById("test1")))
-        angular.element(document.getElementById(svg_id_of_element)).addClass("activeCountry");
+        angular.element(document.getElementById(svg_id_of_element))[0].className.baseVal += "activeCountry";
     }
-
     $scope.utility();
+
+
+    $scope.selectedAnswer = $scope.shortListedCountries[0].shortCode;
+    $scope.submitAnswer = function(submittedAnswer) {
+        debugger;
+        if(submittedAnswer === $scope.activeCountry.shortCode)
+            console.log("Success");
+        else
+            console.log("Failure");
+    }
 }

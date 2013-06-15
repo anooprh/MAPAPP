@@ -1,0 +1,83 @@
+/* Cascading Style Sheet (CSS) definitions for region colours */
+
+/* land: #FEFEE9 -- outside area (or default land colour)
+ * sea: #C6ECFF -- ocean / sea / lake
+ * border: #646464 -- land borders
+ * subject land: #FEFEE9 -- subject colour
+ * other land: #F6E1B9 -- other lands of the same political unity
+ * coast: #0978AB -- lake's coast, rivers, sea coasts
+ * political border: #646464 -- Other minor political borders
+ * interest border: #646464 -- border colour for areas of interest
+ */
+
+/* basic styles */
+path {
+    stroke-linejoin: bevel;
+}
+
+path, circle {
+    stroke-width: 0.25;
+}
+
+/* Main region definition */
+
+.region {
+    fill: #FEFEE9;
+    stroke: #646464;
+    stroke-width: 0.25;
+}
+
+/* Political groupings */
+
+.political {
+    fill: #F6E1B9;
+    stroke: #646464;
+}
+
+/* Subject / area of interest */
+
+.subject {
+    fill: #FEFEE9;
+    stroke: #646464;
+}
+
+circle.highlight {
+    stroke-width: 0.625;
+}
+
+/* Rivers */
+
+.river {
+    fill: none;
+    stroke: #0978AB;
+    stroke-width: 0.125;
+}
+
+/* Sea and decoration */
+.seabase {
+    fill: #C6ECFF;
+    stroke: none;
+}
+
+.mapborder {
+    fill: none;
+    stroke: #0978AB;
+}
+
+.mapshadow {
+    fill: url(#grSea);
+    stroke: none;
+}
+
+/* Grid lines */
+.grid {
+    fill: none;
+    stroke: #0978AB;
+}
+
+ /*Colouring a particular country, use '*' with group ID */
+
+.activeCountry *{
+    fill: #ff0000;
+    stroke: black;
+}
