@@ -2,6 +2,7 @@
 
 //var mapApp = angular.module('mapApp');
 //mapApp.controller()
+
 /* Controllers */
 function MapCtrl($scope) {
     $scope.countries = [
@@ -257,26 +258,57 @@ function MapCtrl($scope) {
     ];
     $scope.shortListedCountries = [];
     $scope.activeCountry = {};
+
     var NUMBER_OF_OPTIONS = 4;
     var NUMBER_OF_COUNTRIES = $scope.countries.length;
+    var svg_id_of_element;
+    var should_show_result = false;
+    var SUCCESS_MESSAGE = "Success";
+    var FAILURE_MESSAGE = "Failure";
+    $scope.failure_counter = 0;
+    $scope.message;
 
     $scope.utility = function(){
         for(var i = 0 ; i < NUMBER_OF_OPTIONS ; i++){
             $scope.shortListedCountries.push($scope.countries[Math.floor((Math.random()*NUMBER_OF_COUNTRIES))]);
         }
         $scope.activeCountry = $scope.shortListedCountries[Math.floor(Math.random()*NUMBER_OF_OPTIONS)];
-        var svg_id_of_element = 'g' + $scope.activeCountry.shortCode;
+        svg_id_of_element = 'g' + $scope.activeCountry.shortCode;
         angular.element(document.getElementById(svg_id_of_element))[0].className.baseVal += "activeCountry";
     }
+
+    $scope.submitAnswer = function(submittedAnswer) {
+        should_show_result = true;
+        if(submittedAnswer === $scope.activeCountry.shortCode){
+            console.log(SUCCESS_MESSAGE);
+            $scope.message=SUCCESS_MESSAGE;
+        }
+        else{
+            console.log(FAILURE_MESSAGE);
+            $scope.message=FAILURE_MESSAGE;
+            $scope.failure_counter++;
+        }
+    }
+
+
     $scope.utility();
 
-
-    $scope.selectedAnswer = $scope.shortListedCountries[0].shortCode;
-    $scope.submitAnswer = function(submittedAnswer) {
-        debugger;
-        if(submittedAnswer === $scope.activeCountry.shortCode)
-            console.log("Success");
-        else
-            console.log("Failure");
+    $scope.nextQuestion = function() {
+        $scope.failure_counter = 0;
+        should_show_result = false;
+        $scope.message == FAILURE_MESSAGE
+        angular.element(document.getElementById(svg_id_of_element))[0].className.baseVal -= "activeCountry";
+        $scope.shortListedCountries = [];
+        $scope.activeCountry = {};
+        $scope.utility();
     }
+
+    $scope.showResult = function(){
+        return should_show_result;
+    }
+
+    $scope.isAnswerFalse = function() {
+        return $scope.message === FAILURE_MESSAGE ? true : false;
+    }
+
 }

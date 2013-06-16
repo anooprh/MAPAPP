@@ -1,13 +1,23 @@
-<html>
+<html ng-app>
 <head>
     <title>sample web page</title>
     <script type="text/javascript" src="angular.min.js"></script>
     <script type="text/javascript" src="mapapp.js"></script>
     <link rel="stylesheet" href="style.css">
 </head>
-<body ng-app>
-<div ng-controller="MapCtrl">
-<!--<embed src="map.svg" type="image/svg+xml"/>-->
+<body ng-controller="MapCtrl">
+
+<div ng-repeat="country in shortListedCountries">
+    <input type="radio" name="countryChoice" value="{{country.shortCode}}" ng-model="$parent.selectedAnswer"
+           ng-change="$parent.submitAnswer($parent.selectedAnswer)">{{country.name}}<br>
+</div>
+<button ng-click="nextQuestion()">Next Question</button>
+<text ng-show="showResult()">
+    {{message}}
+    <text ng-show="isAnswerFalse()">
+        {{failure_counter}}
+    </text>
+</text>
 
 <svg height="553" width="1103" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
@@ -3938,10 +3948,5 @@
  -->
 </svg>
 
-<div ng-repeat="country in shortListedCountries">
-    <input type="radio" name="countryChoice" value="{{country.shortCode}}" ng-model="selectedAnswer">{{country.name}}<br>
-</div>
-<button ng-click="submitAnswer(selectedAnswer)">Submit</button>
-</div>
 </body>
 </html>
