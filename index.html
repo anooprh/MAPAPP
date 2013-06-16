@@ -6,19 +6,6 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body ng-controller="MapCtrl">
-
-<div ng-repeat="country in shortListedCountries">
-    <input type="radio" name="countryChoice" value="{{country.shortCode}}" ng-model="$parent.selectedAnswer"
-           ng-change="$parent.submitAnswer($parent.selectedAnswer)">{{country.name}}<br>
-</div>
-<button ng-click="nextQuestion()">Next Question</button>
-<text ng-show="showResult()">
-    {{message}}
-    <text ng-show="isAnswerFalse()">
-        {{failure_counter}}
-    </text>
-</text>
-
 <svg height="553" width="1103" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg"
      xmlns:xlink="http://www.w3.org/1999/xlink">
 <!-- Created using David Eccles' (gringer) perlshaper.pl script, version 1.75, http://en.wikipedia.org/wiki/User:Gringer/perlshaper -->
@@ -3947,6 +3934,22 @@
     Info: http://www.roitsystems.com/
  -->
 </svg>
+
+<div>
+<span class="optionsGroup" ng-repeat="country in shortListedCountries">
+    <input type="radio" name="countryChoice" value="{{country.shortCode}}" ng-model="$parent.selectedAnswer"
+           ng-change="$parent.submitAnswer($parent.selectedAnswer)">{{country.name}}<br>
+</span>
+<span class="answerGroup">
+<button ng-click="nextQuestion()">Next Question</button>
+<span ng-show="showResult()">
+    {{message}}
+    <span ng-show="isAnswerFalse()">
+        {{failure_counter}}
+    </span>
+</span>
+</span>
+</div>
 
 </body>
 </html>
