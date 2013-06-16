@@ -3936,7 +3936,7 @@
 </svg>
 
 <div>
-    <span class="question">Which Country is highlighted in the map?</span>
+    <span class="question">Which Country is highlighted in the map?</span><br>
     <span class="optionsGroup" ng-repeat="country in shortListedCountries">
         <input type="radio" name="countryChoice" value="{{country.shortCode}}" ng-model="$parent.selectedAnswer"
             ng-change="$parent.submitAnswer($parent.selectedAnswer)">{{country.name}}<br>
